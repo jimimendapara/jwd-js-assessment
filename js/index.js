@@ -120,9 +120,22 @@ setTimeout("CheckTime()",1000);
               }
             
         }
+        const scoreinp = (100*score)/6;
         const showscore = document.getElementById("score");
+        if(score===6){
             
-             showscore.innerHTML=`<span>Your Score:${score}</span>`;
+             showscore.innerHTML=`<span class="text-success"><b>Wow You are brilliant Your Score is ${scoreinp}% (${score} Points)</b></span>`;
+        }
+        else if(score<6 && score>3){
+          showscore.innerHTML=`<span style="color:YellowGreen"><b>You did great Your Score is ${scoreinp}% (${score} Points)</b></span>`;
+        }
+        else if(score===3){
+          showscore.innerHTML=`<span class="text-warning"><b>You Pass the test Your Score is ${scoreinp}% (${score} Points)</b></span>`;
+        }
+        else if(score<3||score===0){
+          showscore.innerHTML=`<span class="text-danger"><b>Better luck next time Your Score is ${scoreinp}% (${score} Points)</b></span>`;
+        
+        }
             
       }
     });
