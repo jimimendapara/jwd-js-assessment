@@ -44,6 +44,16 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    {
+      q: 'Which is the largest planet in the solar system?',
+      o: ['Saturn', 'Earth', 'Jupiter', 'Mars'],
+      a: 2, // array index 2 - so Jupiter is the correct answer here
+    },
+    {
+      q: ' What year did Albert Einstein die?',
+      o: ['1954', '1949', '1960', '1955'],
+      a: 3, // array index 3 - so 1955 is the correct answer here
+    },
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -76,15 +86,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          liElement.style.backgroundColor = "green";
+          
+          
         }
-
+          
         if (radioElement.checked) {
-          // code for task 1 goes here
+              // code for task 1 goes here
+              if (quizItem.a == i){
+                score++;
+              }
+            const showscore = document.getElementById("score");
+            
+             showscore.innerHTML=`<span>Your Score:${score}</span>`;
+            
         }
       }
     });
   };
-
+  const submitbtn = document.getElementById("btnSubmit");
+  submitbtn.addEventListener('click',calculateScore);
+  const resetbtn = document.getElementById("btnReset")
+  resetbtn.addEventListener('click',()=>{ window.location.reload();});
   // call the displayQuiz function
   displayQuiz();
 });
