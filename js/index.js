@@ -54,6 +54,11 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['1954', '1949', '1960', '1955'],
       a: 3, // array index 3 - so 1955 is the correct answer here
     },
+    {
+      q: ' Which planet is known as the Morning Star or the Evening Star?',
+      o: ['Venus', 'Saturn', 'Neptune', 'Uranus'],
+      a: 0, // array index 0 - so Jupiter is the correct answer here
+    },
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -96,17 +101,18 @@ window.addEventListener('DOMContentLoaded', () => {
               if (quizItem.a == i){
                 score++;
               }
-            const showscore = document.getElementById("score");
+            
+        }
+        const showscore = document.getElementById("score");
             
              showscore.innerHTML=`<span>Your Score:${score}</span>`;
             
-        }
       }
     });
-    submitbtn.innerHTML="";
+    submitbtn.style.display="none";
   };
   const time=document.getElementById("time");
-let total_second = 10;
+let total_second = 60;
 let c_minute = parseInt(total_second/60);
 let c_second = parseInt(total_second%60);
  CheckTime=()=>{
