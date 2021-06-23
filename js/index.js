@@ -24,6 +24,23 @@ window.addEventListener('DOMContentLoaded', () => {
   start.addEventListener('click', function (e) {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
+    const time=document.getElementById("time");
+let total_second = 60;
+let c_minute = parseInt(total_second/60);
+let c_second = parseInt(total_second%60);
+ CheckTime=()=>{
+  time.innerHTML=`${c_minute} minutes ${c_second} seconds`;
+  if(total_second<=0){
+    setTimeout(calculateScore,1);
+  }
+  else{
+    total_second=total_second-1;
+    c_minute = parseInt(total_second/60);
+    c_second = parseInt(total_second%60);
+    setTimeout("CheckTime()",1000);
+  }
+}
+setTimeout("CheckTime()",1000);
   });
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -111,23 +128,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     submitbtn.style.display="none";
   };
-  const time=document.getElementById("time");
-let total_second = 60;
-let c_minute = parseInt(total_second/60);
-let c_second = parseInt(total_second%60);
- CheckTime=()=>{
-  time.innerHTML=`${c_minute} minutes ${c_second} seconds`;
-  if(total_second<=0){
-    setTimeout(calculateScore,1);
-  }
-  else{
-    total_second=total_second-1;
-    c_minute = parseInt(total_second/60);
-    c_second = parseInt(total_second%60);
-    setTimeout("CheckTime()",1000);
-  }
-}
-setTimeout("CheckTime()",1000);
+  
   const submitbtn = document.getElementById("btnSubmit");
   submitbtn.addEventListener('click',calculateScore);
   const resetbtn = document.getElementById("btnReset")
