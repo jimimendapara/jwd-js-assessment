@@ -105,22 +105,14 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     submitbtn.innerHTML="";
   };
-  const submitbtn = document.getElementById("btnSubmit");
-  submitbtn.addEventListener('click',calculateScore);
-  const resetbtn = document.getElementById("btnReset")
-  resetbtn.addEventListener('click',()=>{ window.location.reload();});
-  // call the displayQuiz function
-  displayQuiz();
-
-});
-const time=document.getElementById("time");
-let total_second = 60;
+  const time=document.getElementById("time");
+let total_second = 10;
 let c_minute = parseInt(total_second/60);
 let c_second = parseInt(total_second%60);
-const CheckTime=()=>{
+ CheckTime=()=>{
   time.innerHTML=`${c_minute} minutes ${c_second} seconds`;
   if(total_second<=0){
-    setTimeout('document.quiz.submit()',1);
+    setTimeout(calculateScore,1);
   }
   else{
     total_second=total_second-1;
@@ -130,3 +122,12 @@ const CheckTime=()=>{
   }
 }
 setTimeout("CheckTime()",1000);
+  const submitbtn = document.getElementById("btnSubmit");
+  submitbtn.addEventListener('click',calculateScore);
+  const resetbtn = document.getElementById("btnReset")
+  resetbtn.addEventListener('click',()=>{ window.location.reload();});
+  // call the displayQuiz function
+  
+  displayQuiz();
+
+});
