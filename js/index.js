@@ -20,10 +20,13 @@
 *************************** */
 
 window.addEventListener('DOMContentLoaded', () => {
+  let timeId;
+  let total_second = 60;
   const start = document.querySelector('#start');
   start.addEventListener('click', function (e) {
     document.querySelector('#quizBlock').style.display = 'block';
     start.style.display = 'none';
+
     const time=document.getElementById("time");
 let total_second = 60;
 let c_minute = parseInt(total_second/60);
@@ -31,16 +34,21 @@ let c_second = parseInt(total_second%60);
  CheckTime=()=>{
   time.innerHTML=`${c_minute} minutes ${c_second} seconds`;
   if(total_second<=0){
-    setTimeout(calculateScore,1);
+    time.innerHTML=`Time Expired`;
+    timeId = setTimeout(calculateScore,1);
+    
   }
   else{
     total_second=total_second-1;
     c_minute = parseInt(total_second/60);
     c_second = parseInt(total_second%60);
-    setTimeout("CheckTime()",1000);
+    timeId = setTimeout("CheckTime()",1000);
   }
+  
 }
-setTimeout("CheckTime()",1000);
+timeId = setTimeout("CheckTime()",1000);
+
+
   });
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -105,10 +113,12 @@ setTimeout("CheckTime()",1000);
         let r = `radio_${index}_${i}`;
         liElement = document.querySelector('#' + li);
         radioElement = document.querySelector('#' + r);
+        radioElement.disabled = true;
 
         if (quizItem.a == i) {
           //change background color of li element here
           liElement.style.backgroundColor = "green";
+          
           
           
         }
@@ -120,6 +130,8 @@ setTimeout("CheckTime()",1000);
               }
             
         }
+        
+        
         const scoreinp = (100*score)/6;
         const showscore = document.getElementById("score");
         if(score===6){
@@ -139,7 +151,12 @@ setTimeout("CheckTime()",1000);
             
       }
     });
+    
     submitbtn.style.display="none";
+    clearTimeout(timeId);
+    
+    
+    
   };
   
   const submitbtn = document.getElementById("btnSubmit");
@@ -149,5 +166,7 @@ setTimeout("CheckTime()",1000);
   // call the displayQuiz function
   
   displayQuiz();
+  
+  
 
 });
